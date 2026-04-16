@@ -35,6 +35,18 @@ Four autonomous workflows powered by a three-tier Arbiter/Investigator/Executor 
 - `LoopEngine.md` — The convergence algorithm (shared by all 4 workflows)
 - `ArbiterFramework.md` — Judgment criteria for approve/reject decisions
 
+## Prerequisites
+
+| Tool | Required for | Install |
+|------|-------------|---------|
+| [Claude Code](https://claude.com/claude-code) | Everything | `npm install -g @anthropic-ai/claude-code` |
+| [Kitty](https://sw.kovidgoyal.net/kitty/) | Spawn command | `brew install --cask kitty` |
+
+Kitty must have remote control enabled. Add to `~/.config/kitty/kitty.conf`:
+```
+allow_remote_control yes
+```
+
 ## Installation
 
 ### Spawn Command

@@ -81,7 +81,15 @@ The script uses Kitty's `kitty @` IPC protocol:
 | **Investigator** | Opus subagent | Deep code reading, multi-step tracing |
 | **Executor** | Sonnet subagent | Mechanical implementation from specs |
 
-Each workflow runs iterative rounds until findings converge to zero.
+The arbiter never reads implementation files directly — it stays lean to track many domains across many rounds. Investigators discover issues. Executors fix them.
+
+### Convergence
+
+Each workflow runs iterative rounds until findings converge to zero:
+- **Audit**: 3 consecutive clean rounds (arbiter-approved)
+- **Build**: Acceptance criteria met + wiring gate passes
+- **Investigate**: 2 consecutive clean rounds
+- **Review**: 2 consecutive clean rounds
 
 ## Customization
 

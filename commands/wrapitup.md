@@ -12,19 +12,20 @@ Report:
 
 ## Check 2: Uncommitted PAI knowledge
 
-Review this conversation for anything that was learned, decided, or discovered that is NOT yet in PAI memory (`~/.claude/PAI/MEMORY/`).
+Review this conversation for structured domain knowledge that is NOT yet indexed in the knowledge base.
 
-Read `~/.claude/PAI/MEMORY/MEMORY.md` to see what's already indexed. Then check for:
-- New people mentioned (name, role, team) not in the org chart
-- New systems, tools, or services not in memory
-- Decisions made that affect future work
-- Action items assigned to Alex
-- Corrections to existing memory (things that turned out to be wrong)
-- Feedback given to you (behavioral corrections, preferences) not yet saved
+Read `~/.claude/PAI/MEMORY/KNOWLEDGE/INDEX.md` to see what's already indexed. Then check for:
+- New systems, tools, or services learned about
+- Runbooks or failure patterns encountered
+- Processes or workflows clarified or documented
+- Architecture or data model insights
+- Decisions that will affect future work in this domain
 
-For each gap found: state what it is and which memory file it belongs in.
+Do NOT flag: user feedback, behavioral corrections, references, or personal preferences — those have their own intentional flows and are rarely forgotten.
 
-If everything is already persisted: say so in one line.
+For each gap found: state what it is and which knowledge subdirectory it belongs in (e.g. `KNOWLEDGE/dh/systems/`).
+
+If everything is already indexed: say so in one line.
 
 ## Check 3: Safety verdict
 

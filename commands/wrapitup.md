@@ -12,9 +12,9 @@ Report:
 
 ## Check 2: Uncommitted PAI knowledge
 
-Review this conversation for anything that was learned, decided, or discovered that is NOT yet in PAI memory (`~/.claude/projects/-Users-aleksandr-bogdanov--claude/memory/`).
+Review this conversation for anything that was learned, decided, or discovered that is NOT yet in PAI memory (`~/.claude/PAI/MEMORY/`).
 
-Read MEMORY.md to see what's already indexed. Then check for:
+Read `~/.claude/PAI/MEMORY/MEMORY.md` to see what's already indexed. Then check for:
 - New people mentioned (name, role, team) not in the org chart
 - New systems, tools, or services not in memory
 - Decisions made that affect future work

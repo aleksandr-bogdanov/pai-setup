@@ -12,16 +12,16 @@ Report:
 
 ## Check 2: Uncommitted PAI knowledge
 
-Review this conversation for structured domain knowledge that is NOT yet indexed in the knowledge base.
+Review this conversation for anything DH-specific that was learned, decided, or discovered that is NOT yet in the knowledge base.
 
 Read `~/.claude/PAI/MEMORY/KNOWLEDGE/INDEX.md` to see what's already indexed. Then check for:
-- New systems, tools, or services learned about
-- Runbooks or failure patterns encountered
-- Processes or workflows clarified or documented
-- Architecture or data model insights
-- Decisions that will affect future work in this domain
+- New people mentioned (name, role, team) not in the org chart
+- New DH systems, tools, or services not in the knowledge base
+- Decisions made that affect future work
+- Action items assigned to Alex
+- Corrections to existing knowledge (things that turned out to be wrong)
 
-Do NOT flag: user feedback, behavioral corrections, references, or personal preferences — those have their own intentional flows and are rarely forgotten.
+Do NOT flag: user feedback, behavioral corrections, references, or personal preferences — those have their own intentional flows.
 
 For each gap found: state what it is and which knowledge subdirectory it belongs in (e.g. `KNOWLEDGE/dh/systems/`).
 

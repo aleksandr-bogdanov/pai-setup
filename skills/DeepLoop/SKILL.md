@@ -14,11 +14,11 @@ If this directory exists, load and apply any PREFERENCES.md, configurations, or 
 
 **When executing a workflow, do BOTH:**
 
-1. **Send voice notification**:
+1. **Send voice notification** (PAI v5 uses Pulse daemon on port 31337):
    ```bash
-   curl -s -X POST http://localhost:8888/notify \
+   curl -s -X POST http://localhost:31337/notify \
      -H "Content-Type: application/json" \
-     -d '{"message": "Running the WORKFLOWNAME workflow in the DeepLoop skill to ACTION"}' \
+     -d '{"message": "Running the WORKFLOWNAME workflow in the DeepLoop skill to ACTION", "voice_enabled": true}' \
      > /dev/null 2>&1 &
    ```
 
@@ -27,7 +27,7 @@ If this directory exists, load and apply any PREFERENCES.md, configurations, or 
    Running the **WorkflowName** workflow in the **DeepLoop** skill to ACTION...
    ```
 
-**Full documentation:** `~/.claude/PAI/THENOTIFICATIONSYSTEM.md`
+**Full documentation:** `~/.claude/PAI/DOCUMENTATION/Notifications/NotificationSystem.md`
 
 # DeepLoop — Autonomous Iterative Convergence
 
@@ -37,10 +37,11 @@ Three-tier architecture: Arbiter (Opus, you) judges and orchestrates. Investigat
 
 | Workflow | Trigger | File |
 |----------|---------|------|
-| **Audit** | "deep audit", "find all bugs", "audit loop", "overnight audit" | `Workflows/Audit.md` |
+| **Audit** | "deep audit", "find all bugs", "audit loop", "overnight audit" | `Workflows/Audit.md` (5-lens framework: Correctness, Sweep, Test quality, UX, Use case completeness) |
 | **Build** | "deep build", "implement feature deeply", "build with convergence" | `Workflows/Build.md` |
 | **Investigate** | "deep investigate", "overnight investigation", "deep dive report" | `Workflows/Investigate.md` |
 | **Review** | "deep review", "thorough review", "convergence review" | `Workflows/Review.md` |
+| **ParallelFleet** | "deep loop in worktrees", "parallel agent fleet", "spawn parallel deep-loop", "overnight parallel build" | `Workflows/ParallelFleet.md` (worktree fleet — orchestrates many Build/Audit agents in parallel; codifies seven invariants for clean parallel execution) |
 
 ## Context Files
 

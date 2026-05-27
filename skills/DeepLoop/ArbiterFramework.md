@@ -18,11 +18,13 @@
 
 ## Mode: Audit
 
-**APPROVE:** Code crashes on valid input, returns wrong results, leaks data, misses side effects, accepts invalid data, or has a test gap that catches a real regression.
+**APPROVE:** Code crashes on valid input, returns wrong results, leaks data, misses side effects, accepts invalid data, or has a test gap that catches a real regression. **UX regression** introduced as a side effect of the fix. **Use-case scope gap** where a flow the fix should cover is missing (Lens 5 — more important than bugs).
 
 **REJECT:** "Inconsistent with X" when both paths allow the same thing (design choice). Missing test for a pattern already proven by 3+ existing tests.
 
 **Grey area (arbiter judgment):** Missing test for recently added code, docstring lies an AI agent would act on, batch silently differs from single.
+
+**Conclusion requirement:** An audit cannot APPROVE-CLEAN without applying each Audit Lens (see `Workflows/Audit.md` Step 2.5) — Correctness, Sweep, Test quality, UX, Use case completeness. Lenses that don't apply to a given fix must be explicitly noted ("Lens 4 N/A — backend-only").
 
 ---
 

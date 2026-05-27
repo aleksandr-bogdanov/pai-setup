@@ -1,4 +1,4 @@
-You are doing a wrap-up check before the user closes this chat. Run through three checks and produce a concise report. Be honest and specific — this is a safety gate, not a summary.
+You are doing a wrap-up check before the user closes this chat. Run four checks and produce a concise report. Be honest and specific — this is a safety gate, not a summary.
 
 ## Check 1: Uncommitted code
 
@@ -6,36 +6,47 @@ Run `git status` in the current working directory. If not a git repo, say so and
 
 Report:
 - Uncommitted files (staged or unstaged)
-- Untracked files that look meaningful (skip node_modules, .DS_Store, build artifacts)
+- Untracked files that look meaningful (skip `node_modules`, `.DS_Store`, `dist`, `build`, `.next`, `target`, other obvious build artifacts)
 - Any stash entries (`git stash list`)
 - If clean: say so in one line
 
-## Check 2: Uncommitted PAI knowledge
+## Check 2: Active ISA state
 
-Review this conversation for structured domain knowledge that is NOT yet indexed in the knowledge base.
+List `~/.claude/PAI/MEMORY/WORK/` entries from this session. For each ISA:
 
-Read `~/.claude/PAI/MEMORY/KNOWLEDGE/INDEX.md` to see what's already indexed. Then check for:
-- New systems, tools, or services learned about
-- Runbooks or failure patterns encountered
-- Processes or workflows clarified or documented
-- Architecture or data model insights
-- Decisions that will affect future work in this domain
+- Read frontmatter `phase:`.
+- If anything is not `complete`: either drive it to close now, OR document explicitly why it's deferred (with a follow-up task ID if needed).
+- If `_ephemeral/<feature>.md` files exist alongside the master ISA: run `Skill("ISA", "reconcile <ephemeral> → <master>")` BEFORE close, so feature-context edits land back in the master ISA.
 
-Do NOT flag: user feedback, behavioral corrections, references, or personal preferences — those have their own intentional flows and are rarely forgotten.
+If no in-flight ISAs: say so in one line.
 
-For each gap found: state what it is and which knowledge subdirectory it belongs in (e.g. `KNOWLEDGE/dh/systems/`).
+## Check 3: Uncaptured knowledge
 
-If everything is already indexed: say so in one line.
+Scan this conversation for content that lives only in chat and isn't yet captured anywhere persistent. For each gap, name the destination path:
 
-## Check 3: Safety verdict
+- **New facts / decisions / runbooks** → `PAI/USER/<file>.md` (life domain) or `PAI/MEMORY/REFERENCE/<slug>.md` (durable how-to)
+- **New behavioral rules to follow in future sessions** → `PAI/MEMORY/REFERENCE/<slug>.md`
+- **New person facts** (anyone in `PAI/MEMORY/RELATIONSHIP/`) → `PAI/MEMORY/RELATIONSHIP/<slug>.md`
+- **Tracked actions / actionable items** → user's task manager (e.g., Whenful via MCP) if they have one configured
+- **Artifacts the user asked for that haven't been written** → `~/Documents/artifacts/YYYYMMDD_<name>.md`
+- **New domain knowledge / research notes / frameworks** → `PAI/MEMORY/KNOWLEDGE/<slug>.md`
+- **Durable principles / mental models** → `PAI/MEMORY/WISDOM/<slug>.md`
 
-Based on checks 1 and 2, give a single verdict:
+Skip what's already captured in `PAI/USER/`, the active ISA's `Decisions`/`Changelog`/`Verification` sections, or `PAI/MEMORY/`. Don't flag throwaway debugging steps or behavioral feedback already routed to REFERENCE.
+
+If everything is captured: say so in one line.
+
+## Check 4: Safety verdict
+
+Based on checks 1–3, give a single verdict:
 
 **✅ SAFE TO CLOSE** — nothing will be lost.
 
 or
 
 **⚠️ NOT SAFE — save these first:**
-- [bullet list of specific things that would be lost]
+- [bullet list of specific things that would be lost, each with the destination path]
 
-Keep the full report under 30 lines. No padding.
+---
+
+Keep the full report under 30 lines. No padding, no summary of what you checked — just the findings.

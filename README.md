@@ -1,4 +1,4 @@
-# PAI Setup — Claude Code Skills & Commands
+# PAI Setup - Claude Code Skills & Commands
 
 Custom Claude Code skills and commands. Built for [Claude Code](https://claude.com/claude-code) and [PAI v5](https://github.com/danielmiessler/PAI).
 
@@ -6,7 +6,7 @@ Custom Claude Code skills and commands. Built for [Claude Code](https://claude.c
 
 ### Spawn Command (`commands/spawn.md` + `scripts/spawn-session.sh`)
 
-Spawn a new Kitty terminal window running Claude Code with `/remote-control` auto-enabled. Lets you multiply Claude Code sessions from a single conversation — great for mobile.
+Spawn a new Kitty terminal window running Claude Code with `/remote-control` auto-enabled. Lets you multiply Claude Code sessions from a single conversation - great for mobile.
 
 | Command | What it does |
 |---------|-------------|
@@ -28,7 +28,7 @@ Pre-close safety gate that runs 4 checks before you close a chat session:
 | **1. Uncommitted code** | `git status` in cwd, surfaces meaningful unstaged/untracked/stashed work |
 | **2. Active ISA state** | Lists `PAI/MEMORY/WORK/` entries; drives non-`complete` phases to close OR documents deferral; runs ephemeral feature reconcile via `Skill("ISA", "reconcile")` |
 | **3. Uncaptured knowledge** | Scans conversation for facts/decisions/rules/artifacts not yet in `PAI/USER/` or `PAI/MEMORY/{REFERENCE,RELATIONSHIP,KNOWLEDGE,WISDOM}/`; routes actionables to the user's task manager (e.g., Whenful via MCP) |
-| **4. Safety verdict** | ✅ SAFE TO CLOSE — or — ⚠️ NOT SAFE: bulleted gaps with destination paths |
+| **4. Safety verdict** | ✅ SAFE TO CLOSE - or - ⚠️ NOT SAFE: bulleted gaps with destination paths |
 
 Report capped at 30 lines.
 
@@ -38,15 +38,15 @@ Four autonomous workflows powered by a three-tier Arbiter/Investigator/Executor 
 
 | Workflow | Slash command | What it does |
 |----------|--------------|-------------|
-| **Audit** | `/deep-audit` | Autonomous bug hunting — iterative convergence (3 clean rounds to exit) |
-| **Build** | `/deep-build` | Feature implementation with convergence — spec, implement, wiring gate, PR |
+| **Audit** | `/deep-audit` | Autonomous bug hunting - iterative convergence (3 clean rounds to exit) |
+| **Build** | `/deep-build` | Feature implementation with convergence - spec, implement, wiring gate, PR |
 | **Investigate** | `/deep-investigate` | Deep dive reports with NO code changes. Severity-ranked findings |
 | **Review** | `/deep-review` | Multi-round convergent code review, optionally applies fixes |
 
 **Core files:**
-- `SKILL.md` — Entry point and workflow routing
-- `LoopEngine.md` — The convergence algorithm (shared by all 4 workflows)
-- `ArbiterFramework.md` — Judgment criteria for approve/reject decisions
+- `SKILL.md` - Entry point and workflow routing
+- `LoopEngine.md` - The convergence algorithm (shared by all 4 workflows)
+- `ArbiterFramework.md` - Judgment criteria for approve/reject decisions
 
 The four wrapper command files in `commands/deep-*.md` are thin shims that load the skill and run the named workflow. They exist so the slash commands are auto-discovered by Claude Code without any `settings.json` registration.
 
@@ -83,7 +83,7 @@ mkdir -p ~/.claude/skills/Utilities
 cp -r skills/DeepLoop ~/.claude/skills/Utilities/DeepLoop
 ```
 
-After install, start a fresh Claude Code session — `/spawn`, `/wrapitup`, `/deep-audit`, `/deep-build`, `/deep-investigate`, `/deep-review` will be available.
+After install, start a fresh Claude Code session - `/spawn`, `/wrapitup`, `/deep-audit`, `/deep-build`, `/deep-investigate`, `/deep-review` will be available.
 
 ### Selective install
 
@@ -106,18 +106,18 @@ cp -r skills/DeepLoop ~/.claude/skills/Utilities/DeepLoop
 
 ## How It Works
 
-### Spawn — Kitty Remote Control
+### Spawn - Kitty Remote Control
 
 The script uses Kitty's `kitty @` IPC protocol:
 1. `kitty @ launch --type=os-window` opens a new window, returns its ID
 2. `kitty @ send-text --match id:$ID` types into that specific window
 3. A backgrounded timer sends `/remote-control` after 12 seconds
 
-### Wrap-it-up — v5-native safety gate
+### Wrap-it-up - v5-native safety gate
 
 The command exists in `commands/wrapitup.md` and is auto-discovered as `/wrapitup`. It assumes a PAI v5 layout: `PAI/MEMORY/WORK/<slug>/ISA.md` for active work, `PAI/MEMORY/{REFERENCE,RELATIONSHIP,KNOWLEDGE,WISDOM}/` for the memory hierarchy, `PAI/USER/<file>.md` for life-context. If your install differs, edit the destination paths in Check 3.
 
-### DeepLoop — Three-Tier Architecture
+### DeepLoop - Three-Tier Architecture
 
 | Role | Model | Purpose |
 |------|-------|---------|
@@ -125,7 +125,7 @@ The command exists in `commands/wrapitup.md` and is auto-discovered as `/wrapitu
 | **Investigator** | Opus subagent | Deep code reading, multi-step tracing |
 | **Executor** | Sonnet subagent | Mechanical implementation from specs |
 
-The arbiter never reads implementation files directly — it stays lean to track many domains across many rounds. Investigators discover issues. Executors fix them.
+The arbiter never reads implementation files directly - it stays lean to track many domains across many rounds. Investigators discover issues. Executors fix them.
 
 ### Convergence
 
@@ -141,8 +141,8 @@ DeepLoop checks `~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/DeepLoop/` for overrides
 
 ## PAI v5 compatibility notes
 
-- Voice notifications route to the Pulse daemon on port `31337` (PAI v5 default). PAI v4 used port `8888` — this repo now targets v5.
-- Wrap-it-up's ISA check expects v5's `ISA.md` format with `phase:` frontmatter. PAI v4 used `PRD.md` — this command no longer reads PRDs.
+- Voice notifications route to the Pulse daemon on port `31337` (PAI v5 default). PAI v4 used port `8888` - this repo now targets v5.
+- Wrap-it-up's ISA check expects v5's `ISA.md` format with `phase:` frontmatter. PAI v4 used `PRD.md` - this command no longer reads PRDs.
 - Memory paths follow v5's hierarchical `PAI/MEMORY/{REFERENCE,KNOWLEDGE,...}` layout, not v4's flat `~/.claude/memory/`.
 
 If you're still on PAI v4, pin this repo to a commit before the v5 migration or update the paths manually.
@@ -150,3 +150,7 @@ If you're still on PAI v4, pin this repo to a commit before the v5 migration or 
 ## License
 
 MIT
+
+---
+
+<img src=".github/mark.svg" height="15" alt=""> built by [bogdanov.wtf](https://bogdanov.wtf)
